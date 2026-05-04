@@ -1,35 +1,42 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// TitleScreen.cs — Gas Runner Main Menu
+/// Handles title screen UI interactions and scene transitions.
+/// Attach to an empty GameObject in the MainMenu scene.
+/// </summary>
 public class TitleScreen : MonoBehaviour
 {
     void Start()
     {
-        SoundManager.Instance.PlayTitleMusic();
+        // Reset game state when returning to menu
+        Time.timeScale = 1f;
+        
+        // Play menu music
+        SoundManager.Instance?.PlayMusic();
+        
+        Debug.Log("[TitleScreen] Main menu loaded.");
     }
 
-    public void OnStartButton()
+    /// <summary>Start a new game through GameManager.</summary>
+    public void PlayGame()
     {
-        SoundManager.Instance.PlayClick();
-        SceneManager.LoadScene("GameScene");
+        Debug.Log("[TitleScreen] Starting game...");
+        GameManager.Instance?.StartGame();
     }
 
-    public void OnOptionButton()
+    /// <summary>Load settings screen.</summary>
+    public void OpenSettings()
     {
-        SoundManager.Instance.PlayClick();
-        // shows the options panel
-        OptionsManager.Instance.OpenOptions();
+        Debug.Log("[TitleScreen] Opening settings...");
+        SceneManager.LoadScene("Settings");
     }
 
-    public void OnExitButton()
+    /// <summary>Exit application.</summary>
+    public void QuitGame()
     {
-        SoundManager.Instance.PlayClick();
+        Debug.Log("[TitleScreen] Quitting game.");
         Application.Quit();
-        Debug.Log("Game Exited");
-    }
-
-    public void OnButtonHover()
-    {
-        SoundManager.Instance.PlayHover();
     }
 }
