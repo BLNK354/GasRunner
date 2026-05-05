@@ -51,7 +51,7 @@ public class ObstacleSpawner : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
-            spawnTimer = spawnInterval;
+            spawnTimer = GetAdjustedSpawnInterval();
             SpawnObstacle();
         }
 
@@ -86,6 +86,12 @@ public class ObstacleSpawner : MonoBehaviour
             return puddlePrefab;
         else
             return barrierPrefab;
+    }
+
+    float GetAdjustedSpawnInterval()
+    {
+        float obstacleRate = Mathf.Max(0.1f, GameSettings.ObstacleRateMultiplier);
+        return spawnInterval / obstacleRate;
     }
 
     // ------------------------------------------------------------------ //

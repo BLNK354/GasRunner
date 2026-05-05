@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        float effectiveSpeed = currentSpeed;
+        float effectiveSpeed = currentSpeed * GameSettings.PlayerSpeedMultiplier;
 
         if (disruptTimer > 0)
             effectiveSpeed *= disruptMultiplier;
@@ -80,9 +80,9 @@ public class PlayerController : MonoBehaviour
 
     void HandleJumpInput()
     {
-        if (isGrounded && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)))
+        if (isGrounded && (Input.GetKeyDown(GameSettings.JumpKey) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * GameSettings.JumpForceMultiplier);
             anim?.SetTrigger("Jump");
             Debug.Log("[Player] Jumped!");
         }

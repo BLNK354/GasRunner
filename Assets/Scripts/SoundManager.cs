@@ -38,6 +38,8 @@ public class SoundManager : MonoBehaviour
         musicSource = sources.Length > 0 ? sources[0] : gameObject.AddComponent<AudioSource>();
         sfxSource = sources.Length > 1 ? sources[1] : gameObject.AddComponent<AudioSource>();
 
+        SetMusicVolume(GameSettings.MusicVolume);
+        SetSFXVolume(GameSettings.SfxVolume);
         PlayMusic();
     }
 
